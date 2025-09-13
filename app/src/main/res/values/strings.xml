@@ -2,4 +2,7 @@
     <string name="app_name">LightsOut</string>
     <string name="lights_kyrellos">lights Kyrellos</string>
     <string name="score">Score: %1$d</string>
+    <string name="reset">Reset</string>
+    <string name="randomize">Randomize</string>
+    <string name="title_activity_win">WinActivity</string>
 </resources>

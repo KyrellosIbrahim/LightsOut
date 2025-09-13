@@ -49,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
         updateScore();
         recolor();
 
+        Button resetButton = findViewById(R.id.resetButton);
+        resetButton.setOnClickListener(view -> resetGame());
+        Button randomizeButton = findViewById(R.id.randomizeButton);
+        randomizeButton.setOnClickListener(view -> {
+            randomize();
+            recolor();
+        });
+
         for (int i = 0; i < grid.getChildCount(); i++) {
             Button gridButton = (Button) grid.getChildAt(i);
             gridButton.setOnClickListener(buttonListener);
@@ -96,5 +104,15 @@ public class MainActivity extends AppCompatActivity {
     private void updateScore(){
         int count = countLightsOn();
         scoreTV.setText(getString(R.string.score, count));
+    }
+
+    private void resetGame() {
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
+                cellState[i][j] = false;
+            }
+        }
+        recolor();
+        updateScore();
     }
 }
