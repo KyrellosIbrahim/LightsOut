@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Button;
 import android.widget.GridLayout;
 
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int GRID_SIZE = 3;
     private GridLayout grid;
     private boolean[][] cellState;
+    private TextView scoreTV;
 
     View.OnClickListener buttonListener = new View.OnClickListener() {
         @Override
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             recolor();
+            updateScore();
         }
     };
 
@@ -41,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         grid = findViewById(R.id.light_grid);
-
+        scoreTV = findViewById(R.id.score);
         randomize();
-
+        updateScore();
         recolor();
 
         for (int i = 0; i < grid.getChildCount(); i++) {
@@ -75,8 +78,23 @@ public class MainActivity extends AppCompatActivity {
                 cellState[i][j] = random.nextBoolean();
             }
         }
+        updateScore();
     }
 
+    public int countLightsOn(){
+        int count = 0;
+        for(int i = 0; i < GRID_SIZE; i++){
+            for(int j = 0; j < GRID_SIZE; j++){
+                if(cellState[i][j]){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 
-
+    private void updateScore(){
+        int count = countLightsOn();
+        scoreTV.setText(getString(R.string.score, count));
+    }
 }
